@@ -1,5 +1,101 @@
 # Agent Instructions
 
+## Zazz Methodology
+
+Methodology docs root: `.zazz`
+
+This fork is being developed as a Zazz methodology repository. Use `AGENTS.md` as the
+entry point, then load only the methodology docs, standards, features, proposals, or
+specifications that are relevant to the task at hand.
+
+Authoritative standards index:
+
+- `.zazz/standards/index.yaml`
+
+Required behavior:
+
+1. Read `.zazz/standards/index.yaml` before creating, modifying, reviewing, or validating
+   code when standards may apply.
+2. Match standards by `applies_to.paths` and `applies_to.activities`.
+3. Load only the relevant standards and companion documents.
+4. Prefer an applicable standard over incidental legacy patterns.
+5. If no applicable standard exists, prefer the most recent intentional project pattern.
+
+Feature context:
+
+- Feature index: `.zazz/features/index.yaml`
+- Proposals: `.zazz/proposals/`
+- Architecture docs: `.zazz/architecture/`
+- Deliverable specifications: `.zazz/specifications/`
+- Execution records and handoff notes: `.zazz/execution/`
+
+Use proposals for exploratory direction, feature docs for durable product capability
+context, and specifications for approved bounded implementation work. The initial
+token-efficiency and review-axis proposal lives under `.zazz/proposals/`.
+
+## Zazz Skills
+
+This repo vendors the applicable Zazz workflow skills under `.agents/skills/`:
+
+- `proposal-builder`
+- `feature-doc-builder`
+- `architecture-doc-builder`
+- `spec-builder`
+- `standard-builder`
+- `conformance`
+- `qa-testing`
+- `doc-check`
+- `pr-builder`
+- `pr-review`
+- `gh-stack`
+- `worktree`
+
+Tool-specific helper skills such as Jira, PostgreSQL, SQL Server, and Zazz Board API are
+not vendored unless this repo later declares those systems.
+
+## Worktree Policy
+
+Use the Zazz bare-repo plus sibling-worktree layout:
+
+```text
+code-review-graph/
+├── .bare/
+├── main/
+└── <feature-or-deliverable-worktree>/
+```
+
+Rules:
+
+- `main/` is the integration worktree for `main`.
+- The container directory is not an active checkout.
+- Do implementation work in feature, proposal, docs, or deliverable worktrees.
+- Use flat branch names that can also be sibling directory names.
+- Prefer Worktrunk for routine worktree operations:
+  - from the container, `wt -C main list`
+  - from the container, `wt -C main switch --create <flat-branch-name>`
+  - from the container, `wt -C main switch <branch-or-pr>`
+
+The checked-in Worktrunk project config lives at `main/.config/wt.toml`. Invoking
+Worktrunk with `-C main` loads that shared config while still managing the same bare
+worktree set. `wt -C .bare ...` is still useful for low-level inspection when needed.
+
+## Shared-File Coordination
+
+No external locking service is declared for this fork. Use isolated worktrees for parallel
+work and serialize overlapping-file edits when worktrees alone do not prevent conflicts.
+
+## Agent Execution Discipline
+
+Default execution guidance lives in `.zazz/agent-execution-discipline.md`.
+
+Repo-specific defaults:
+
+- Integration branch: `main`
+- Durable docs root: `.zazz`
+- Worktree setup reference: `.zazz/worktree-setup.md`
+- Worktrunk cheat sheet: `.zazz/wt-cheat-sheet.md`
+- Human review remains the merge authority; agents should not merge PRs.
+
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
 ## Quick Reference

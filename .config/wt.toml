@@ -1,0 +1,19 @@
+# Worktrunk project configuration for the Zazz worktree layout.
+
+[forge]
+platform = "github"
+hostname = "github.com"
+
+[list]
+full = true
+branches = true
+remotes = true
+
+[pre-merge]
+tests = "uv run pytest"
+lint = "uv run ruff check ."
+
+[aliases]
+test = "uv run pytest"
+lint = "uv run ruff check ."
+doc-check = "git diff --check"

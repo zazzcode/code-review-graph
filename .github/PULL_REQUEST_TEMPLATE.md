@@ -1,20 +1,70 @@
-# Pull Request
+<!--
+ENSURE YOUR PR TITLE HAS AT LEAST ONE CATEGORY LABEL.
 
-## Linked issue
+Categories:
+  CRG — Code Review Graph runtime, CLI, MCP tools, graph analysis, or review payloads
+  DOC — Documentation, Zazz specs, architecture docs, standards, README, or usage guides
+  SKILL — Agent skills, hooks, prompts, or workflow guidance under .agents/
+  TEST — Test-only changes, fixtures, or validation harness updates
+  CI — CI/CD, release, packaging, dependency, or infrastructure changes
 
-<!-- Link the issue this PR addresses, e.g. "Closes #123".
-     If there is no issue, briefly say why (e.g. trivial typo fix). -->
+Combine with + for cross-cutting PRs.
 
-Closes #
+Example PR titles using these labels:
+  [CRG] Add scoped review-context payloads
+  [DOC] Document CRG architecture and data flow
+  [SKILL] Add code-review-graph review skill
+  [TEST] Add contract mismatch regression coverage
+  [CI] Update publish workflow
+  [CRG+DOC] Add context-savings command docs
+  [CRG+SKILL] Route PR review through CRG packets
+  [CRG+TEST] Add advisory review-signal coverage
+-->
 
-## What & why
+### Zazz Context
 
-<!-- What does this PR change, and why is the change needed? -->
+<!--
+Link the governing Zazz specification, proposal, feature doc, architecture note,
+execution record, or PR/body-only intent.
 
-## How it was tested
+No Avaza, Jira, or external ticket is required for this fork. If no durable
+Zazz document applies, briefly say why.
+-->
 
-<!-- Paste the exact commands you ran and summarise their results. Typical commands
-     (see CONTRIBUTING.md "Running Tests" and "Linting and Type Checking"): -->
+- Spec:
+- Proposal / feature / architecture:
+- Execution notes:
+
+### WHY
+
+<!--
+Summarize why this PR exists, not just what changed.
+
+Example: "CRG review packets currently make Zazz section agents read too much
+source context. This PR makes review evidence portable, budgeted, and easier to
+route through standards/spec review."
+-->
+
+### WHAT
+
+<!-- Keep this section only if the WHAT is not self-evident from WHY. -->
+
+### Instructions for Reviewers
+
+<!--
+Tell reviewers what to inspect or validate.
+
+For CRG changes, include the exact command, base branch, scope, token budget,
+and expected output shape. For skill/docs changes, name the workflow or review
+scenario the reviewer should walk through.
+-->
+
+### How It Was Tested
+
+<!--
+Paste the exact commands run and summarize their results. Include failed or
+partially passing checks when they are relevant to review.
+-->
 
 ```bash
 uv run pytest tests/ --tb=short -q
@@ -22,13 +72,19 @@ uv run ruff check code_review_graph/
 uv run mypy code_review_graph/ --ignore-missing-imports --no-strict-optional
 ```
 
-## Checklist
+### Checklist
 
-<!-- Mirrors the requirements in CONTRIBUTING.md ("Making Changes" and "Code Style"). -->
+- [ ] Tests added or updated for new behavior
+- [ ] Relevant automated tests pass
+- [ ] Relevant lint/type/doc checks pass, or known unrelated failures are called out
+- [ ] Docs updated where behavior or workflow changed
+- [ ] Zazz standards/specs reviewed for the touched paths
+- [ ] Human review remains the merge authority
 
-- [ ] Tests added for new functionality
-- [ ] All tests pass: `uv run pytest tests/ --tb=short -q`
-- [ ] Linting passes: `uv run ruff check code_review_graph/`
-- [ ] Type checking passes: `uv run mypy code_review_graph/ --ignore-missing-imports --no-strict-optional`
-- [ ] Lines are at most 100 characters
-- [ ] Docs updated where behavior changed (README, `docs/`, docstrings)
+### Demo
+
+<!--
+Optional. Include screenshots, terminal output excerpts, generated graph views,
+or before/after payload snippets when they help the reviewer understand the
+change.
+-->
